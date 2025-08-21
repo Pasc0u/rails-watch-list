@@ -1,3 +1,19 @@
 <h1><%= @list.name %></h1>
 <p>Here will come our movie cards</p>
 <p>Here will come a link to add a movie</p>
+<% @bookmarks.each do |bookmark| %>
+<%= bookmark.movie.title %>
+<%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<% end %>
+
+
+
+<h1>New bookmark</h1>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.input :comment %>
+  <%= f.association :movie %>
+  <%= f.submit "Create bookmark", class: "btn btn-primary" %>
+<% end %>

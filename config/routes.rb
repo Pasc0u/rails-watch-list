@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'lists/index'
-  get 'lists/new'
-  get 'lists/show'
-  get 'lists/create'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,4 +11,7 @@ Rails.application.routes.draw do
   get "lists/new", to: "lists#new", as: :new_list
   get "lists/:id", to: "lists#show", as: :list
   post "lists", to: "lists#create"
+  # get "lists/:list_id/bookmarks/new", to: "bookmarks#new", as: :new_list_bookmark
+  post "lists/:list_id/bookmarks", to: "bookmarks#create", as: :list_bookmarks
+  delete "bookmarks/:id", to: "bookmarks#destroy", as: :bookmark
 end
